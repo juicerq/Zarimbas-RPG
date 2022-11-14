@@ -68,7 +68,7 @@ function switchRest(quantity){
       clearInterval(resting)
       return
     }},
-    0)
+    1000)
 }
 
 function restOn(){
@@ -152,7 +152,7 @@ function fightMob(mob){
       }
       mobTotalDmg += mob.damage - getItemFromStorage('defense')
       takeDamage(mob.damage)
-  }, 100);
+  }, 700);
 }
 
 function death(){
