@@ -50,7 +50,7 @@ footer {
   position: absolute;
   width: 100%;
   bottom: 0%;
-  align-items: flex-end;
+  align-items: center;
 }
 
 footer > p{
@@ -98,7 +98,6 @@ footer > button {
   width: fit-content;
   padding: 2px;
   margin: 10px 0;
-  margin-right: 200px;
 }
 
 main{

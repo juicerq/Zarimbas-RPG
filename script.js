@@ -13,7 +13,7 @@ if (localStorage.length == 0){
   updateHtmlStatus('current-hp')
   updateHtmlStatus('defense')
   updateHtmlStatus('gold')
-  writeInConsole('Bem-vindo de volta ao seu jogo!')
+  writeInConsole('Bem-vindo de volta!')
 }
 
 //Gold Functions
@@ -138,7 +138,7 @@ function fightMob(mob){
         return writeInConsole(`Você ganhou! Você perdeu ${mobTotalDmg} de vida e ganhou ${earnedGold} de gold!`)
       }
       writeInConsole('---------------------------')
-      if (Math.random() > (0.5 - getItemFromStorage('attack')/100 + mob.defense/100)){
+      if (Math.random() > (0.35 - getItemFromStorage('attack')/100 + mob.defense/100)){
         mobHealth -= getItemFromStorage('attack')
         writeInConsole(`${mob.name} perdeu ${getItemFromStorage('attack')} de vida`)
       } else {
