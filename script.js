@@ -16,7 +16,6 @@ if (localStorage.length == 0){
   writeInConsole('Bem-vindo de volta ao seu jogo!')
 }
 
-
 //Gold Functions
 function addGold(quantity){
   localStorage.setItem('gold', (getItemFromStorage('gold') + quantity))
@@ -69,7 +68,7 @@ function switchRest(quantity){
       clearInterval(resting)
       return
     }},
-    1000)
+    0)
 }
 
 function restOn(){
@@ -83,7 +82,6 @@ function restOff(){
 }
 
 // HTML Functions
-
 function writeInConsole(message){
   $('.console').html($('.console').html() + `<p>${message}</p>`)
   for (let i = 0; i < 100; i++){
@@ -110,27 +108,51 @@ function openAndClose(classname){
   })
 }
 
+function disableHuntButtons(){
+  $('.hunt div button').each(function (index, btn){
+    btn.setAttribute('disabled', true)
+  })
+}
+
+function enableHuntButtons(){
+  $('.hunt div button').each(function (index, btn){
+    btn.removeAttribute('disabled')
+  })
+}
 
 //Combat Functions
 function fightMob(mob){
+  disableHuntButtons()
   let mobTotalDmg = 0
   let mobHealth = mob.hp
+  let earnedGold = 1 + Math.random().toFixed() * mob.goldLoot
   if (getItemFromStorage('attack') == 0){
     return writeInConsole('Vá treinar mais!')
   }
-  while (mobHealth > 0){
-    mobHealth -= getItemFromStorage('attack')
-    takeDamage( mob.damage, getItemFromStorage('defense'))
-    mobTotalDmg += mob.damage - (100/(100 + getItemFromStorage('defense'))).toFixed()
-    if (getItemFromStorage('current-hp') <= 0){
-      localStorage.setItem('current-hp', 0)
-      // mudar html vida se morte
-      return death()
-    }
-  }
-  updateHtmlStatus('current-hp')
-  addGold(mob.goldLoot)
-  return writeInConsole(`Você ganhou! Você perdeu ${mobTotalDmg} de vida e ganhou ${mob.goldLoot} de gold!`)
+  let round = setInterval(() => {
+    updateHtmlStatus('current-hp')
+      if (mobHealth < 0){
+        addGold(earnedGold)
+        enableHuntButtons()
+        clearInterval(round)
+        return writeInConsole(`Você ganhou! Você perdeu ${mobTotalDmg} de vida e ganhou ${earnedGold} de gold!`)
+      }
+      writeInConsole('---------------------------')
+      if (Math.random() > (0.5 - getItemFromStorage('attack')/100 + mob.defense/100)){
+        mobHealth -= getItemFromStorage('attack')
+        writeInConsole(`${mob.name} perdeu ${getItemFromStorage('attack')} de vida`)
+      } else {
+        writeInConsole('Você errou o ataque!')
+      }
+      if (getItemFromStorage('current-hp') <= 0){
+        localStorage.setItem('current-hp', 0)
+        enableHuntButtons()
+        clearInterval(round)
+        return death()
+      }
+      mobTotalDmg += mob.damage - getItemFromStorage('defense')
+      takeDamage(mob.damage)
+  }, 100);
 }
 
 function death(){
@@ -140,7 +162,9 @@ function death(){
   writeInConsole(`Você morreu! Você perdeu todo seu gold!`)
 }
 
-function takeDamage(damage, defense){
-  localStorage.setItem('current-hp', (getItemFromStorage('current-hp') - (damage - 100/(100 + defense))).toFixed())
+function takeDamage(damage){
+  const damageTaken = damage - getItemFromStorage('defense')
+  localStorage.setItem('current-hp', (getItemFromStorage('current-hp') - damageTaken))
+  writeInConsole(`Você tomou ${damageTaken} de dano!`)
   return getItemFromStorage('current-hp')
 }
