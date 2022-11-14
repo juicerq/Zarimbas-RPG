@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- Fonte -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+
+    <header>
+    <ul>
+      <li><div class="status-max-hp"> Vida Máxima: <span class="current-hp">100</span>/<span class="max-hp">100</span></div></li>
+      <li><div> Ataque: <span class="attack">0</span></div></li>
+      <li><div> Defesa: <span class="defense">0</span></div></li>
+      <li><div> Gold: <span class="gold">5</span></div></li>
+    </ul>
+    <ul>
+      <li>
+        <span>Ações: </span>
+        <button class="rest" title="Descanse para recuperar vida" onclick="switchRest(1)">Descansar</button>
+      </li>
+    </ul>
+  </header>
+
+    <main>
+
+      <div class="train">
+        <button class="open-train-options" onclick="openAndClose('train-options')">Treinar</button>
+        <div class="train-options hide">
+          <span>O que deseja treinar?</span>
+          <button onclick="increaseStatus('attack', 1, 5)" class="add-attack">Ataque (5G)</button>
+          <button onclick="increaseStatus('max-hp', 1, 50)" class="add-hp">Vida (50G)</button>
+          <button onclick="increaseStatus('defense', 1, 50)" class="add-defense">Defense (50G)</button>
+        </div>
+      </div>
+
+      <div class="hunt">
+        <button class="open-hunt-options" onclick="openAndClose('hunt-options')">Caçar</button>
+        <div class="hunt-options hide">
+          <span>O que deseja caçar?</span>
+          <button class="kill-rat" onclick="fightMob(rat)">Rato</button>
+          <button class="kill-goblin" onclick="fightMob(goblin)">Goblin</button>
+          <button class="kill-esqueleto" onclick="fightMob(esqueleto)">Esqueleto</button>
+          <button class="kill-zumbi" onclick="fightMob(zumbi)">Zumbi</button>
+          <button class="kill-cyclop" onclick="fightMob(cyclop)">Ciclope</button>
+        </div>
+      </div>
+
+      <div class="blacksmith">
+        <button class="open-blacksmith-options" onclick="openAndClose('blacksmith-options')">Ferreiro</button>
+        <div class="blacksmith-options hide">
+          <span>O que deseja comprar?</span>
+          <button>Rato</button>
+        </div>
+      </div>
+
+    </main>
+    
+  </div>
+
+  <footer>
+    <div class="console"></div>
+    <button onclick="cleanConsole()">Limpar</button>
+  </footer>
+  
+  <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="script.js"></script>
+  <script src="class/mob.js"></script>
+  <script src="class/mobs.js"></script>
+</body>
+</html>

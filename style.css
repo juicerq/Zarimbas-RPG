@@ -1,0 +1,141 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'MedievalSharp', cursive;
+  font-size: 1.1em;
+}
+
+body {
+  background-color: rgb(24, 23, 23);
+  color: white;
+  height: 100vh;
+}
+
+/* Header */
+
+header {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 50px;
+}
+
+#caracter-status {
+  width: fit-content;
+  padding: 10px;
+  margin: 5px auto;
+}
+
+#caracter-status ul{
+  list-style: none;
+  display: flex;
+  padding: 10px;
+  margin: 0px 0px 20px;
+  gap: 50px;
+  border: 1px solid #882cf1;
+}
+
+.rest {
+  font-size: 20px;
+  width: fit-content;
+  padding: 2px;
+}
+
+
+/* Footer */
+
+footer {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: 100%;
+  bottom: 0%;
+  align-items: flex-end;
+}
+
+footer > p{
+  font-size: 30px;
+}
+
+.console {
+  border: 1px solid rgb(247, 245, 245);
+  height: 200px;
+  width: 500px;
+  text-align: left;
+  padding: 5px;
+  overflow: auto;
+  -ms-overflow-style: none;
+  animation: appear 0.5s forwards;
+}
+
+
+.console::-webkit-scrollbar {
+  display: none;
+}
+
+.console p{
+  margin-top: 15px;
+  padding: 2px;
+  width: fit-content;
+  font-size: 20px;
+  color: white;
+}
+
+.console p:last-child{
+  animation: appear 0.5s forwards;
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0%;
+  }
+  100%{
+    opacity: 100%;
+  }
+}
+
+footer > button {
+  width: fit-content;
+  padding: 2px;
+  margin: 10px 0;
+  margin-right: 200px;
+}
+
+main{
+  display: flex;
+  flex-direction: column;
+  margin: 0 5px;
+  height: 100%;
+  gap: 60px;
+}
+
+.train, .hunt, .blacksmith {
+  display: flex;
+}
+
+.train > button, .hunt > button, .blacksmith > button{
+  height: 50px;
+}
+
+.train-options, .hunt-options, .blacksmith-options {
+  display: flex;
+  margin: 0px 30px;
+}
+
+.train-options span, .hunt-options span, .blacksmith-options span{
+  line-height: 1.5;
+}
+
+.train-options button, .hunt-options button, .blacksmith-options button {
+  height: 50px;
+  margin: 0px 10px;
+  padding: 5px;
+}
+
+.hide {
+  display: none;
+}
+
+.open-train-options, .open-hunt-options, .open-blacksmith-options {
+  width: 110px;
+}
