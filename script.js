@@ -125,7 +125,7 @@ function fightMob(mob){
   disableHuntButtons()
   let mobTotalDmg = 0
   let mobHealth = mob.hp
-  let earnedGold = 1 + Math.random().toFixed() * mob.goldLoot
+  let earnedGold = 2 + Math.random().toFixed() * mob.goldLoot
   if (getItemFromStorage('attack') == 0){
     return writeInConsole('Vá treinar mais!')
   }
