@@ -65,7 +65,7 @@ function switchRest(quantity){
       return
     } else {
       $('main button').attr('disabled', false)
-      clearInterval(resting)
+      document.querySelector('.rest').classList.remove('resting')
       amIResting = !amIResting
     }},
     1000)
