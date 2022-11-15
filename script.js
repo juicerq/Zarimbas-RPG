@@ -161,11 +161,12 @@ function fightMob(mob){
     updateHtmlStatus('current-hp')
       writeInConsole('---------------------------')
       if (Math.random() > (0.4 - getItemFromStorage('attack')/100 + mob.defense/100)){
-        mobHealth -= getItemFromStorage('attack')
+        finalDamage = Number((Math.random() * (getItemFromStorage('attack') - (getItemFromStorage('attack') * 0.5)) + (getItemFromStorage('attack') * 0.5)).toFixed())
+        mobHealth -= finalDamage
         if (mobHealth < 0){
           writeInConsole(`${mob.name} morreu!`)
         } else {
-          writeInConsole(`${mob.name} perdeu ${getItemFromStorage('attack')} de vida (${mobHealth})`)
+          writeInConsole(`${mob.name} perdeu ${finalDamage} de vida (${mobHealth})`)
         }
         if (mobHealth <= 0){
           addGold(earnedGold)
