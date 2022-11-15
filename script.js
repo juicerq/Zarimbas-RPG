@@ -90,14 +90,6 @@ function restOff(){
   document.querySelector('.rest').classList.remove('resting')
 }
 
-function disableRest(){
-  $('.rest').prop('disabled', true)
-}
-
-function enableRest(){
-  $('.rest').prop('disabled', false)
-}
-
 // HTML Functions
 function writeInConsole(message){
   $('.console').html($('.console').html() + `<p>${message}</p>`)
@@ -110,14 +102,48 @@ function cleanConsole(){
   $('.console').html('')
 }
 
-function openAndClose(classname){
-  $('main div div').each(function (index, div){
+// function openAndClose(classname){
+//   $('main div div').each(function (index, div){
+//     if (this.classList.contains(classname)){
+//       if (!this.classList.contains('hide')) {
+//         this.classList.add('hide')
+//       } else {
+//         this.classList.remove('hide')
+//       }
+//     }
+//     if (!div.classList.contains(classname)){
+//       div.classList.add('hide')
+//     }
+//   })
+// }
+
+function openPopUp(classname){
+  $('main').css('opacity', '0.5')
+  $('header').css('opacity', '0.5')
+  $('footer').css('opacity', '0.5')
+  $('footer').css('display', 'none')
+  disableMain()
+  disableRest()
+  $('aside div').each(function (index, div){
     if (this.classList.contains(classname)){
-      if (!this.classList.contains('hide')) {
-        this.classList.add('hide')
-      } else {
-        this.classList.remove('hide')
-      }
+      this.classList.remove('hide')
+    }
+    if (!div.classList.contains(classname)){
+      div.classList.add('hide')
+    }
+  })
+}
+
+function closePopUp(classname){
+  $('footer').css('display', 'flex')
+  $('aside div').each(function (index, div){
+    if (this.classList.contains(classname)){
+      this.classList.add('hide')
+      $('main').css('opacity', '1')
+      $('header').css('opacity', '1')
+      $('footer').css('opacity', '1')
+      enableMain()
+      enableRest()
     }
     if (!div.classList.contains(classname)){
       div.classList.add('hide')
@@ -143,6 +169,14 @@ function disableMain(){
 
 function enableMain(){
   $('main button').prop('disabled', false)
+}
+
+function disableRest(){
+  $('.rest').prop('disabled', true)
+}
+
+function enableRest(){
+  $('.rest').prop('disabled', false)
 }
 
 //Combat Functions

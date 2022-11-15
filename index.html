@@ -13,66 +13,79 @@
 </head>
 <body>
   <div class="app">
-
+    
     <header>
-    <ul>
-      <li><div class="status-max-hp"> Vida Máxima: <span class="current-hp">100</span>/<span class="max-hp">100</span></div></li>
-      <li><div> Ataque: <span class="attack">0</span></div></li>
-      <li><div> Defesa: <span class="defense">0</span></div></li>
-      <li><div> Gold: <span class="gold">10</span></div></li>
-    </ul>
-    <ul>
-      <li>
-        <span>Ações: </span>
-        <button class="rest" title="Descanse para recuperar vida" onclick="switchRest(1)">Descansar</button>
-      </li>
-    </ul>
-  </header>
+      <ul>
+        <li><div class="status-max-hp"> Vida Máxima: <span class="current-hp">100</span>/<span class="max-hp">100</span></div></li>
+        <li><div> Ataque: <span class="attack">0</span></div></li>
+        <li><div> Defesa: <span class="defense">0</span></div></li>
+        <li><div> Gold: <span class="gold">10</span></div></li>
+      </ul>
+      <ul>
+        <li>
+          <span>Ações: </span>
+          <button class="rest" title="Descanse para recuperar vida" onclick="switchRest(1)">Descansar</button>
+        </li>
+      </ul>
+    </header>
 
+    
     <main>
-
+      
       <div class="train">
-        <button class="open-train-options" onclick="openAndClose('train-options')">Treinar</button>
-        <div class="train-options hide">
-          <span>O que deseja treinar?</span>
-          <button onclick="increaseStatus('attack', 1, 10)" class="add-attack">Ataque (10G)</button>
-          <button onclick="increaseStatus('max-hp', 10, 20)" class="add-hp">Vida (20G)</button>
-          <button onclick="increaseStatus('defense', 1, 50)" class="add-defense">Defense (50G)</button>
-        </div>
+        <button class="open-train-options" onclick="openPopUp('pop-up-train')">Treinar</button>
       </div>
-
+      
       <div class="hunt">
-        <button class="open-hunt-options" onclick="openAndClose('hunt-options')">Caçar</button>
-        <div class="hunt-options hide">
-          <span>O que deseja caçar?</span>
-          <button class="Rato" onclick="fightMob(rat)">Rato</button>
-          <button class="Goblin" onclick="fightMob(goblin)">Goblin</button>
-          <button class="Esqueleto" onclick="fightMob(esqueleto)">Esqueleto</button>
-          <button class="Orc" onclick="fightMob(orc)">Orc</button>
-          <button class="Ciclope" onclick="fightMob(cyclop)">Ciclope</button>
-        </div>
+        <button class="open-hunt-options" onclick="openPopUp('pop-up-hunt')">Caçar</button>
       </div>
-
+      
       <div class="blacksmith">
-        <button class="open-blacksmith-options" onclick="openAndClose('blacksmith-options')">Ferreiro</button>
+        <button class="open-blacksmith-options" onclick="openPopUp('pop-up-blacksmith')">Ferreiro</button>
         <div class="blacksmith-options hide">
           <span>O que deseja comprar?</span>
           <button>Rato</button>
         </div>
       </div>
-
+      
     </main>
     
-  </div>
+    <aside>
+      <div class="pop-up-hunt hide">
+        <ul>
+          <li><p>O que deseja caçar?</p></li>
+          <li><button class="Rato" onclick="fightMob(rat), closePopUp('pop-up-hunt')">Rato</button></li>
+          <li><button class="Goblin" onclick="fightMob(goblin), closePopUp('pop-up-hunt')">Goblin</button></li>
+          <li><button class="Esqueleto" onclick="fightMob(esqueleto), closePopUp('pop-up-hunt')">Esqueleto</button></li>
+          <li><button class="Orc" onclick="fightMob(orc), closePopUp('pop-up-hunt')">Orc</button></li>
+          <li><button class="Ciclope" onclick="fightMob(cyclop), closePopUp('pop-up-hunt')">Ciclope</button></li>
+          <button class="close-pop-up" onclick="closePopUp('pop-up-hunt')">Fechar</button>
+        </ul>
+      </div>
 
-  <footer>
-    <div class="console"></div>
-    <button onclick="cleanConsole()">Limpar</button>
-  </footer>
+      <div class="pop-up-train hide">
+        <ul>
+          <li><p>O que deseja treinar?</p></li>
+          <li><button onclick="increaseStatus('attack', 1, 10)" class="add-attack">Ataque (10G)</button></li>
+          <li><button onclick="increaseStatus('max-hp', 10, 20)" class="add-hp">Vida (20G)</button></li>
+          <li><button onclick="increaseStatus('defense', 1, 50)" class="add-defense">Defense (50G)</button></li>
+          <button class="close-pop-up" onclick="closePopUp('pop-up-train')">Fechar</button>
+        </ul>          
+      </div>
+
+    </aside>
+    
+    <footer class="">
+      <div class="console"></div>
+      <button onclick="cleanConsole()">Limpar</button>
+    </footer>
+  </div>
+  
   
   <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
   <script src="script.js"></script>
   <script src="class/mob.js"></script>
   <script src="class/mobs.js"></script>
+  <script src="class/sword.js"></script>
 </body>
 </html>

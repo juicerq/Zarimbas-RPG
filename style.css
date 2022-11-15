@@ -41,6 +41,75 @@ header {
   padding: 2px;
 }
 
+@keyframes appear {
+  0% {
+    opacity: 0%;
+  }
+  100%{
+    opacity: 100%;
+  }
+}
+
+main{
+  display: flex;
+  flex-direction: column;
+  margin: 0 30px;
+  height: 100%;
+  gap: 30px;
+}
+
+
+
+.hide {
+  display: none;
+}
+
+/* Pop Up */
+
+.open-train-options, .open-hunt-options, .open-blacksmith-options {
+  width: 110px;
+  height: 60px;
+  margin-top: 20px;
+}
+
+.pop-up-hunt, .pop-up-train {
+  position: absolute;
+  top: 12%;
+  left: 25%;
+  margin: 0 auto;
+  height: 700px;
+  width: 1000px;
+  border: 1px solid rgb(69, 67, 62);
+  box-shadow: 1px 1px 5px white;
+  border-radius: 3%;
+  animation: appear 0.5s forwards;
+}
+
+.pop-up-train .close-pop-up{
+  margin-top: 250px
+}
+
+.pop-up-hunt .close-pop-up{
+  margin-top: 100px
+}
+
+.pop-up-hunt ul, .pop-up-train ul{
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  gap: 30px;
+}
+
+.pop-up-hunt ul li p, .pop-up-train ul li p{
+  font-size: 60px;
+  margin-top: 20px;
+}
+
+.pop-up-train button, .pop-up-hunt button{
+  width: 250px;
+}
 
 /* Footer */
 
@@ -48,17 +117,25 @@ footer {
   display: flex;
   flex-direction: column;
   position: absolute;
-  width: 100%;
+  width: fit-content;
   bottom: 0%;
-  align-items: center;
+  align-items: left;
 }
 
 footer > p{
   font-size: 30px;
 }
 
+footer > button {
+  width: fit-content;
+  padding: 2px;
+  margin: 10px 190px;
+}
+
 .console {
   border: 1px solid rgb(247, 245, 245);
+  border-radius: 2%;
+  box-shadow: 1px 1px 5px white;
   height: 200px;
   width: 500px;
   text-align: left;
@@ -79,58 +156,4 @@ footer > p{
   width: fit-content;
   font-size: 20px;
   color: white;
-}
-
-@keyframes appear {
-  0% {
-    opacity: 0%;
-  }
-  100%{
-    opacity: 100%;
-  }
-}
-
-footer > button {
-  width: fit-content;
-  padding: 2px;
-  margin: 10px 0;
-}
-
-main{
-  display: flex;
-  flex-direction: column;
-  margin: 0 5px;
-  height: 100%;
-  gap: 60px;
-}
-
-.train, .hunt, .blacksmith {
-  display: flex;
-}
-
-.train > button, .hunt > button, .blacksmith > button{
-  height: 50px;
-}
-
-.train-options, .hunt-options, .blacksmith-options {
-  display: flex;
-  margin: 0px 30px;
-}
-
-.train-options span, .hunt-options span, .blacksmith-options span{
-  line-height: 1.5;
-}
-
-.train-options button, .hunt-options button, .blacksmith-options button {
-  height: 50px;
-  margin: 0px 10px;
-  padding: 5px;
-}
-
-.hide {
-  display: none;
-}
-
-.open-train-options, .open-hunt-options, .open-blacksmith-options {
-  width: 110px;
 }
