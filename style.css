@@ -81,10 +81,6 @@ footer > p{
   color: white;
 }
 
-.console p:last-child{
-  animation: appear 0.5s forwards;
-}
-
 @keyframes appear {
   0% {
     opacity: 0%;

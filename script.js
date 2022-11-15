@@ -1,5 +1,3 @@
-let amIResting = document.querySelector('.rest').classList.contains('resting')
-
 if (localStorage.length == 0){
   createStorageItem('attack')
   createStorageItem('max-hp')
@@ -52,24 +50,26 @@ function getItemFromStorage(status){
 }
 
 // Rest Functions
+let amIResting = document.querySelector('.rest').classList.contains('resting')
 function switchRest(quantity){
+  if (getItemFromStorage('current-hp') >= getItemFromStorage('max-hp')){
+    $('main button').attr('disabled', false)
+    writeInConsole('Você já está com a vida cheia!')
+    return 
+  }
   $('main button').attr('disabled', true)
   amIResting? restOff() : restOn()
   amIResting = !amIResting
-  if (getItemFromStorage('current-hp') >= getItemFromStorage('max-hp')){
-    restOff()
-    $('main button').attr('disabled', false)
-    return writeInConsole('Você já está com a vida cheia!')
-  }
   let resting = setInterval(function () {
     if (getItemFromStorage('current-hp') < getItemFromStorage('max-hp') && amIResting){
       increaseStatus('current-hp', quantity, 0)
     } else {
       $('main button').attr('disabled', false)
       restOff()
+      amIResting = !amIResting
       clearInterval(resting)
     }},
-    1000)
+    100)
 }
 
 function restOn(){
@@ -79,7 +79,6 @@ function restOn(){
 
 function restOff(){
   document.querySelector('.rest').classList.remove('resting')
-  writeInConsole('Você parou de descansar!')
 }
 
 // HTML Functions
@@ -126,7 +125,7 @@ function fightMob(mob){
   disableHuntButtons()
   let mobTotalDmg = 0
   let mobHealth = mob.hp
-  let earnedGold = (2 + Math.random()).toFixed() * mob.goldLoot
+  let earnedGold = Number((Math.random() * (mob.goldLoot - (mob.goldLoot * 0.6)) + (mob.goldLoot * 0.6)).toFixed())
   if (getItemFromStorage('attack') == 0){
     return writeInConsole('Vá treinar mais!')
   }
@@ -139,7 +138,7 @@ function fightMob(mob){
         return writeInConsole(`Você ganhou! Você perdeu ${mobTotalDmg} de vida e ganhou ${earnedGold} de gold!`)
       }
       writeInConsole('---------------------------')
-      if (Math.random() > (0.35 - getItemFromStorage('attack')/100 + mob.defense/100)){
+      if (Math.random() > (0.3 - getItemFromStorage('attack')/100 + mob.defense/100)){
         mobHealth -= getItemFromStorage('attack')
         writeInConsole(`${mob.name} perdeu ${getItemFromStorage('attack')} de vida`)
       } else {
@@ -153,7 +152,7 @@ function fightMob(mob){
       }
       mobTotalDmg += mob.damage - getItemFromStorage('defense')
       takeDamage(mob.damage)
-  }, 700);
+  }, 100);
 }
 
 function death(){
