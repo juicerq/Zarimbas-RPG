@@ -65,9 +65,8 @@ function switchRest(quantity){
       return
     } else {
       $('main button').attr('disabled', false)
-      amIResting = !amIResting
       clearInterval(resting)
-      return
+      amIResting = !amIResting
     }},
     1000)
 }
