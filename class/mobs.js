@@ -6,7 +6,7 @@ let cyclop = new Mob(60, 150, 10, 120, 'Ciclope')
 
 function setMobTitle(array){
   array.forEach(function (mob){
-    $(`.${mob.name}`).attr('title', `Dano: ${mob.damage} Vida: ${mob.hp} Defesa: ${mob.defense} Loot: ${mob.goldLoot}`)
+    $(`.${mob.name}`).attr('title', `Dano: ${mob.damage} Vida: ${mob.hp} Defesa: ${mob.defense} Loot: ${(mob.goldLoot * 0.5 ).toFixed() + '-' + mob.goldLoot}`)
   })
 }
 
