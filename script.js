@@ -58,6 +58,7 @@ function switchRest(quantity){
   amIResting = !amIResting
   if (getItemFromStorage('current-hp') >= getItemFromStorage('max-hp')){
     restOff()
+    $('main button').attr('disabled', false)
     return writeInConsole('Você já está com a vida cheia!')
   }
   let resting = setInterval(function () {
