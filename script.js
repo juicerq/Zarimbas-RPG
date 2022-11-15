@@ -62,10 +62,8 @@ function switchRest(quantity){
   let resting = setInterval(function () {
     if (getItemFromStorage('current-hp') < getItemFromStorage('max-hp') && amIResting){
       increaseStatus('current-hp', quantity, 0)
-      return
     } else {
       $('main button').attr('disabled', false)
-      document.querySelector('.rest').classList.remove('resting')
       clearInterval(resting)
     }},
     1000)
