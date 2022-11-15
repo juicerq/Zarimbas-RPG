@@ -52,8 +52,9 @@ function getItemFromStorage(status){
 // Rest Functions
 let amIResting = document.querySelector('.rest').classList.contains('resting')
 function switchRest(quantity){
+  disableMain()
   if (getItemFromStorage('current-hp') >= getItemFromStorage('max-hp')){
-    $('main button').attr('disabled', false)
+    enableMain()
     writeInConsole('Você já está com a vida cheia!')
     return 
   }
@@ -61,15 +62,23 @@ function switchRest(quantity){
   amIResting? restOff() : restOn()
   amIResting = !amIResting
   let resting = setInterval(function () {
-    if (getItemFromStorage('current-hp') < getItemFromStorage('max-hp') && amIResting){
-      increaseStatus('current-hp', quantity, 0)
-    } else {
-      $('main button').attr('disabled', false)
-      restOff()
+    if (getItemFromStorage('current-hp') >= getItemFromStorage('max-hp')) {
+      enableMain()
+      console.log('elsif')
       amIResting = !amIResting
       clearInterval(resting)
+      return
+    }
+    if (getItemFromStorage('current-hp') < getItemFromStorage('max-hp') && amIResting){
+      increaseStatus('current-hp', quantity, 0)
+      console.log('if')
+    } else {
+      enableMain()
+      console.log('else')
+      clearInterval(resting)
+      return
     }},
-    100)
+    1000)
 }
 
 function restOn(){
@@ -79,6 +88,14 @@ function restOn(){
 
 function restOff(){
   document.querySelector('.rest').classList.remove('resting')
+}
+
+function disableRest(){
+  $('.rest').prop('disabled', true)
+}
+
+function enableRest(){
+  $('.rest').prop('disabled', false)
 }
 
 // HTML Functions
@@ -120,39 +137,56 @@ function enableHuntButtons(){
   })
 }
 
+function disableMain(){
+  $('main button').prop('disabled', true)
+}
+
+function enableMain(){
+  $('main button').prop('disabled', false)
+}
+
 //Combat Functions
 function fightMob(mob){
-  disableHuntButtons()
+  disableRest()
+  disableMain()
   let mobTotalDmg = 0
   let mobHealth = mob.hp
   let earnedGold = Number((Math.random() * (mob.goldLoot - (mob.goldLoot * 0.6)) + (mob.goldLoot * 0.6)).toFixed())
   if (getItemFromStorage('attack') == 0){
+    enableMain()
+    enableRest()
     return writeInConsole('Vá treinar mais!')
   }
   let round = setInterval(() => {
     updateHtmlStatus('current-hp')
-      if (mobHealth <= 0){
-        addGold(earnedGold)
-        enableHuntButtons()
-        clearInterval(round)
-        return writeInConsole(`Você ganhou! Você perdeu ${mobTotalDmg} de vida e ganhou ${earnedGold} de gold!`)
-      }
       writeInConsole('---------------------------')
-      if (Math.random() > (0.3 - getItemFromStorage('attack')/100 + mob.defense/100)){
+      if (Math.random() > (0.4 - getItemFromStorage('attack')/100 + mob.defense/100)){
         mobHealth -= getItemFromStorage('attack')
-        writeInConsole(`${mob.name} perdeu ${getItemFromStorage('attack')} de vida`)
+        if (mobHealth < 0){
+          writeInConsole(`${mob.name} morreu!`)
+        } else {
+          writeInConsole(`${mob.name} perdeu ${getItemFromStorage('attack')} de vida (${mobHealth})`)
+        }
+        if (mobHealth <= 0){
+          addGold(earnedGold)
+          enableRest()
+          enableMain()
+          clearInterval(round)
+          return writeInConsole(`Você ganhou! Você perdeu ${mobTotalDmg} de vida e ganhou ${earnedGold} de gold!`)
+        }
       } else {
         writeInConsole('Você errou o ataque!')
       }
       if (getItemFromStorage('current-hp') <= 0){
         localStorage.setItem('current-hp', 0)
-        enableHuntButtons()
+        enableRest()
+        enableMain()
         clearInterval(round)
         return death()
       }
       mobTotalDmg += mob.damage - getItemFromStorage('defense')
       takeDamage(mob.damage)
-  }, 100);
+  }, 1000);
 }
 
 function death(){
