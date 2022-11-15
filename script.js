@@ -53,6 +53,7 @@ function getItemFromStorage(status){
 
 // Rest Functions
 function switchRest(quantity){
+  $('main button').attr('disabled', true)
   amIResting? restOff() : restOn()
   amIResting = !amIResting
   if (getItemFromStorage('current-hp') >= getItemFromStorage('max-hp')){
@@ -61,7 +62,6 @@ function switchRest(quantity){
   let resting = setInterval(function () {
     if (getItemFromStorage('current-hp') < getItemFromStorage('max-hp') && amIResting){
       increaseStatus('current-hp', quantity, 0)
-      $('main button').attr('disabled', true)
       return
     } else {
       $('main button').attr('disabled', false)
