@@ -66,6 +66,7 @@ function switchRest(quantity){
     } else {
       $('main button').attr('disabled', false)
       document.querySelector('.rest').classList.remove('resting')
+      clearInterval(resting)
     }},
     1000)
 }
