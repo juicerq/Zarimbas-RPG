@@ -72,7 +72,7 @@ main{
   margin-top: 20px;
 }
 
-.pop-up-hunt, .pop-up-train {
+.pop-up-hunt, .pop-up-train, .pop-up-blacksmith {
   position: absolute;
   top: 12%;
   left: 25%;
@@ -93,7 +93,7 @@ main{
   margin-top: 100px
 }
 
-.pop-up-hunt ul, .pop-up-train ul{
+.pop-up-hunt ul, .pop-up-train ul, .pop-up-blacksmith ul{
   list-style: none;
   display: flex;
   flex-direction: column;
@@ -102,12 +102,12 @@ main{
   gap: 30px;
 }
 
-.pop-up-hunt ul li p, .pop-up-train ul li p{
+.pop-up-hunt ul li p, .pop-up-train ul li p, .pop-up-blacksmith ul li p{
   font-size: 60px;
   margin-top: 20px;
 }
 
-.pop-up-train button, .pop-up-hunt button{
+.pop-up-train button, .pop-up-hunt button, .pop-up-blacksmith button{
   width: 250px;
 }
 
@@ -136,7 +136,7 @@ footer > button {
   border: 1px solid rgb(247, 245, 245);
   border-radius: 2%;
   box-shadow: 1px 1px 5px white;
-  height: 200px;
+  height: 150px;
   width: 500px;
   text-align: left;
   padding: 5px;
